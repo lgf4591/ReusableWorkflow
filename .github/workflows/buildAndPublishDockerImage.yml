@@ -9,9 +9,9 @@ on:
       tag: 
         type: string
     secrets:
-      registry_username:
+      dockerhub_username:
         required: true
-      registry_password:
+      dockerhub_password:
         required: true
 
 jobs:
@@ -27,8 +27,8 @@ jobs:
       - name: Login to the Registry
         uses: docker/login-action@v3
         with:
-          username: ${{secrets.registry_username}}
-          password: ${{secrets.registry_password}}
+          username: ${{secrets.dockerhub_username}}
+          password: ${{secrets.dockerhub_password}}
       
       - name: Set the tag
         run: |
@@ -44,7 +44,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{secrets.registry_username}}/${{inputs.image_name}}:${{env.final_tag}}
+          tags: ${{secrets.dockerhub_username}}/${{inputs.image_name}}:${{env.final_tag}}
           
           
   do-something-else:
