@@ -34,18 +34,17 @@ jobs:
         run: |
           if [ -z "${{inputs.tag}}" ]
           then
-            echo "{final_tag}={latest}" >> $GITHUB_ENV
+            echo "final_tag=latest" >> $GITHUB_ENV
           else
-            echo "{final_tag}={${{inputs.tag}}}" >> $GITHUB_ENV
+            echo "final_tag=${{inputs.tag}}" >> $GITHUB_ENV
           fi
-          echo "${{secrets.dockerhub_username}}/${{inputs.image_name}}:${{env.final_tag}}"
       
       - name: Build and Push the Image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          tags: ${{secrets.dockerhub_username}}/${{inputs.image_name}}:${{env.final_tag}}
+          tags: "${{secrets.dockerhub_username}}/${{inputs.image_name}}:$final_tag"
           
           
   do-something-else:
