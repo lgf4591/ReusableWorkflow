@@ -44,7 +44,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: "${{secrets.dockerhub_username}}/${{inputs.image_name}}:$final_tag"
+          tags: ${{secrets.dockerhub_username}}/${{inputs.image_name}}:${{env.final_tag}}
           
           
   do-something-else:
